@@ -73,7 +73,6 @@ namespace Calc {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->btnClose = (gcnew System::Windows::Forms::Button());
 			this->btnReset = (gcnew System::Windows::Forms::Button());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
@@ -167,6 +166,7 @@ namespace Calc {
 			this->txt1->Size = System::Drawing::Size(90, 23);
 			this->txt1->TabIndex = 4;
 			this->txt1->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->txt1->TextChanged += gcnew System::EventHandler(this, &Form1::txt1_TextChanged);
 			// 
 			// lbl1
 			// 
@@ -212,6 +212,7 @@ namespace Calc {
 			this->txt2->Size = System::Drawing::Size(90, 23);
 			this->txt2->TabIndex = 8;
 			this->txt2->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->txt2->TextChanged += gcnew System::EventHandler(this, &Form1::txt2_TextChanged);
 			// 
 			// txtResult
 			// 
@@ -301,6 +302,7 @@ namespace Calc {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(20)));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(354, 225);
 			this->Controls->Add(this->btnNoProd);
 			this->Controls->Add(this->btnProd);
@@ -319,7 +321,7 @@ namespace Calc {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false;
 			this->Name = L"Form1";
-			this->Text = L"Calc";
+			this->Text = L"Калькулятор";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -349,6 +351,10 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 			 double i2=Convert::ToDouble(txt2->Text);}
 			catch(...){lblWarning->Text="Некорректный ввод";
 				return;};
+			if ((txt1->Text->IndexOf(L",") == 0) || (txt2->Text->IndexOf(L",") == 0)) {lblWarning->Text="Некорректный ввод";
+				return;}
+			if (((txt1->Text->IndexOf(L",") == txt1->Text->Length - 1))||(txt2->Text->IndexOf(L",") == txt2->Text->Length - 1)) {lblWarning->Text="Некорректный ввод";
+			return;}
 			this->lblWarning->Text = L"";
 			this->lblOper->Text=L"Сложение";
 			  i1=Convert::ToDouble(txt1->Text);
@@ -371,6 +377,10 @@ private: System::Void btnNoAdd_Click(System::Object^  sender, System::EventArgs^
 			 double i2=Convert::ToDouble(txt2->Text);}
 			catch(...){lblWarning->Text="Некорректный ввод";
 				return;};
+			if ((txt1->Text->IndexOf(L",") == 0) || (txt2->Text->IndexOf(L",") == 0)) {lblWarning->Text="Некорректный ввод";
+				return;}
+			if (((txt1->Text->IndexOf(L",") == txt1->Text->Length - 1))||(txt2->Text->IndexOf(L",") == txt2->Text->Length - 1)) {lblWarning->Text="Некорректный ввод";
+			return;}
 			this->lblWarning->Text = L"";
 			this->lblOper->Text=L"Вычитание";
 			  i1=Convert::ToDouble(txt1->Text);
@@ -391,6 +401,10 @@ private: System::Void btnProd_Click(System::Object^  sender, System::EventArgs^ 
 			 double i2=Convert::ToDouble(txt2->Text);}
 			catch(...){lblWarning->Text="Некорректный ввод";
 				return;};
+			if ((txt1->Text->IndexOf(L",") == 0) || (txt2->Text->IndexOf(L",") == 0)) {lblWarning->Text="Некорректный ввод";
+				return;}
+			if (((txt1->Text->IndexOf(L",") == txt1->Text->Length - 1))||(txt2->Text->IndexOf(L",") == txt2->Text->Length - 1)) {lblWarning->Text="Некорректный ввод";
+			return;}
 			this->lblWarning->Text = L"";
 			this->lblOper->Text=L"Умножение";
 			  i1=Convert::ToDouble(txt1->Text);
@@ -411,6 +425,14 @@ private: System::Void btnNoProd_Click(System::Object^  sender, System::EventArgs
 			 double i2=Convert::ToDouble(txt2->Text);}
 			catch(...){lblWarning->Text="Некорректный ввод";
 				return;};
+			if ((txt1->Text->IndexOf(L",") == 0) || (txt2->Text->IndexOf(L",") == 0)) {lblWarning->Text="Некорректный ввод";
+				return;}
+			if (((txt1->Text->IndexOf(L",") == txt1->Text->Length - 1))||(txt2->Text->IndexOf(L",") == txt2->Text->Length - 1)) {lblWarning->Text="Некорректный ввод";
+			return;}
+			if (txt2->Text == L"0") {
+				lblWarning->Text="Делить на 0 нельзя";
+				return;
+			}
 			this->lblWarning->Text = L"";
 			this->lblOper->Text=L"Деление";
 			  i1=Convert::ToDouble(txt1->Text);
@@ -419,6 +441,20 @@ private: System::Void btnNoProd_Click(System::Object^  sender, System::EventArgs
 			this->txtResult->Text = Convert::ToString(i3);
 		 }
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void txt1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+			 int i1 = txt1->Text->Length;
+			 if (txt1->Text->IndexOf(L".") > -1) {
+				   txt1->Text=txt1->Text->Replace(L".",L",");
+				   txt1->SelectionStart = i1;
+			 }
+		 }
+private: System::Void txt2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+			 int i1 = txt2->Text->Length;
+			 if (txt2->Text->IndexOf(L".") > -1) {
+				   txt2->Text=txt1->Text->Replace(L".",L",");
+				   txt2->SelectionStart = i1;
+			 }
 		 }
 };
 }
