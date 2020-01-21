@@ -341,10 +341,10 @@ private: System::Void btnReset_Click(System::Object^  sender, System::EventArgs^
 private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  e) {
 			double  i1, i2, i3;
 			if (txt1->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число"; this->txtResult->Text = "";
 			   return ;}
 			else {if (txt2->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число"; this->txtResult->Text = "";
 			   return ;}};
 			try {
 			 double i1=Convert::ToDouble(txt1->Text);
@@ -367,10 +367,10 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 private: System::Void btnNoAdd_Click(System::Object^  sender, System::EventArgs^  e) {
 			 double  i1, i2, i3;
 			if (txt1->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число";
+			{this->lblWarning->Text="Ошибка!\nВы не ввели первое число"; this->txtResult->Text = "";
 			   return ;}
 			else {if (txt2->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число"; this->txtResult->Text = "";
 			   return ;}};
 			try {
 			 double i1=Convert::ToDouble(txt1->Text);
@@ -391,10 +391,10 @@ private: System::Void btnNoAdd_Click(System::Object^  sender, System::EventArgs^
 private: System::Void btnProd_Click(System::Object^  sender, System::EventArgs^  e) {
 			 double  i1, i2, i3;
 			if (txt1->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число"; this->txtResult->Text = "";
 			   return ;}
 			else {if (txt2->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число"; this->txtResult->Text = "";
 			   return ;}};
 			try {
 			 double i1=Convert::ToDouble(txt1->Text);
@@ -415,10 +415,10 @@ private: System::Void btnProd_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void btnNoProd_Click(System::Object^  sender, System::EventArgs^  e) {
 			 double  i1, i2, i3;
 			if (txt1->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели первое число"; this->txtResult->Text = "";
 			   return ;}
 			else {if (txt2->Text->Length==0)
-			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число";
+			   {this->lblWarning->Text="Ошибка!\nВы не ввели второе число"; this->txtResult->Text = "";
 			   return ;}};
 			try {
 			 double i1=Convert::ToDouble(txt1->Text);
